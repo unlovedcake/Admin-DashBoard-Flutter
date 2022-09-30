@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.responsive_admin_dashboard">
+    package="com.construction-app">
    <application
         android:label="responsive_admin_dashboard"
         android:icon="@mipmap/ic_launcher">

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_admin_dashboard/constants/constants.dart';
 import 'package:responsive_admin_dashboard/screens/components/drawer_list_tile.dart';
 
+import '../../router/routes-name.dart';
+
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({Key? key}) : super(key: key);
 
@@ -43,7 +45,11 @@ class DrawerMenu extends StatelessWidget {
           DrawerListTile(
               title: 'Logout',
               svgSrc: 'assets/icons/Logout.svg',
-              tap: () {}),
+              tap: () {
+
+                Navigator.of(context).pushNamed(RoutesName.HOME_URL,
+                );
+              }),
         ],
       ),
     );

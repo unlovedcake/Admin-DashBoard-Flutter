@@ -16,3 +16,13 @@ If you found this project useful, then please consider giving it a :star: on Git
 ![App UI](/adminpromo.gif)
 ![App UI](/scrvideo.gif)
 ![App UI](/thumb.png)
+
+
+npm install -g firebase-tools
+firebase login
+firebase init
+
+firebase deploy --only hosting:construction-app
+
+Generate sha1
+#keytool -list -v -keystore "C:\Users\GoodApps Inc\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
