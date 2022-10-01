@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/auth-provider.dart';
 import '../../models/user-model.dart';
+import '../../router/routes-name.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -20,17 +23,48 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Register"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Center(
-            child: Container(
-              margin: EdgeInsets.only(top: 50,bottom: 50),
+    return  Material(
+      child: ConstrainedBox(
+        constraints: BoxConstraints.expand(height: 600, width: 1000),
+          child : LayoutBuilder(
+          builder: (BuildContext ctx, BoxConstraints constraints) {
 
+        // if the screen width >= 480 i.e Wide Screen
+        if (constraints.maxWidth >= 800) {
+
+          return   Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+
+              constraints.maxWidth >= 1000  ? Container(
+                width: 400,
+
+                child:   SvgPicture.asset(
+                  'assets/images/register-bg-image.svg',
+
+                ),
+              ) : SizedBox.shrink(),
+              containerTextField(context),
+            ],
+          );
+        }else{
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: containerTextField(context),
+          );
+        }}),
+
+
+      ),
+    );
+  }
+
+  Container containerTextField(BuildContext context) {
+    return Container(
+              margin: EdgeInsets.only(top: 50,bottom: 50),
               width: 600,
+
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 color: Colors.grey[200],
@@ -43,19 +77,22 @@ class _RegisterState extends State<Register> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                   children: [
+                    SizedBox(height: 100,),
                     TextField(
                       controller: firstNameController,
                       decoration: InputDecoration(
-                       labelText: 'First Name',
+                        labelText: 'First Name',
                         hintText: 'First Name',
                         filled: true,
                         fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
-                            borderSide: BorderSide.none, borderRadius: BorderRadius.circular(20)),
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(20)),
                       ),
                     ),
+                    SizedBox(height: 20,),
                     TextField(
                       controller: lastNameController,
                       decoration: InputDecoration(
@@ -64,9 +101,11 @@ class _RegisterState extends State<Register> {
                         filled: true,
                         fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
-                            borderSide: BorderSide.none, borderRadius: BorderRadius.circular(20)),
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(20)),
                       ),
                     ),
+                    SizedBox(height: 20,),
                     TextField(
                       controller: emailController,
                       decoration: InputDecoration(
@@ -75,9 +114,12 @@ class _RegisterState extends State<Register> {
                         filled: true,
                         fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
-                            borderSide: BorderSide.none, borderRadius: BorderRadius.circular(20)),
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(20)),
                       ),
                     ),
+                    SizedBox(height: 20,),
+
                     TextField(
                       controller: passwordController,
                       decoration: InputDecoration(
@@ -86,9 +128,12 @@ class _RegisterState extends State<Register> {
                         filled: true,
                         fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
-                            borderSide: BorderSide.none, borderRadius: BorderRadius.circular(20)),
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(20)),
                       ),
                     ),
+                    SizedBox(height: 50,),
+
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
                           primary: Colors.black,
@@ -115,11 +160,23 @@ class _RegisterState extends State<Register> {
                           context.read<AuthProvider>().register(userModel, context);
                         },
                         child: Text("REGISTER")),
+
+                    SizedBox(height: 50,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Already have an account?'),
+                        TextButton(onPressed: (){
+                          Navigator.of(context).pushNamed(RoutesName.LOGIN_URL);
+                        }, child: Text('Login here...',
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(color: Colors.blue, letterSpacing: .5),
+                          ),),),
+                      ],)
                   ],
                 ),
               ),
-            ),
-          ),
-        ));
+            );
   }
 }

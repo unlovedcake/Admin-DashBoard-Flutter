@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_admin_dashboard/constants/constants.dart';
 
+import '../../widgets/dialog-add-new-project.dart';
 import 'bar_chart_users.dart';
 
-class Users extends StatelessWidget {
-  const Users({Key? key}) : super(key: key);
+class Projects extends StatelessWidget {
+  const Projects({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +20,72 @@ class Users extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Users",
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 15,
-              color: textColor,
-            ),
+          Row(
+            children: [
+              Text(
+                "Users",
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15,
+                  color: textColor,
+                ),
+              ),
+
+              OutlinedButton(onPressed: (){
+                ShowDialogAddNewProject.showInformationDialog(context);
+
+              }, child: Text('Add New Project'))
+            ],
           ),
           Expanded(
-            child: BarChartUsers(),
+            child: Center(child: Column(
+                children:<Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Table",textScaleFactor: 2,style: TextStyle(fontWeight:FontWeight.bold),),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Table(
+
+                      // textDirection: TextDirection.rtl,
+                      // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
+                      // border:TableBorder.all(width: 2.0,color: Colors.red),
+                      children: [
+                        TableRow(
+                            children: [
+                              Text("Education",textScaleFactor: 1.5,),
+                              Text("Institution name",textScaleFactor: 1.5),
+                              Text("University",textScaleFactor: 1.5),
+                            ]
+                        ),
+                        TableRow(
+                            children: [
+                              Text("B.Tech",textScaleFactor: 1.5),
+                              Text("ABESEC",textScaleFactor: 1.5),
+                              Text("AKTU",textScaleFactor: 1.5),
+                            ]
+                        ),
+                        TableRow(
+                            children: [
+                              Text("12th",textScaleFactor: 1.5),
+                              Text("Delhi Public School",textScaleFactor: 1.5),
+                              Text("CBSE",textScaleFactor: 1.5),
+                            ]
+                        ),
+                        TableRow(
+                            children: [
+                              Text("High School",textScaleFactor: 1.5),
+                              Text("SFS",textScaleFactor: 1.5),
+                              Text("ICSE",textScaleFactor: 1.5),
+                            ]
+                        ),
+                      ],
+                    ),
+                  ),
+                ]
+            ),),
+            // child: BarChartUsers(),
           )
         ],
       ),

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_admin_dashboard/constants/constants.dart';
+import 'package:responsive_admin_dashboard/controllers/controller.dart';
 import 'package:responsive_admin_dashboard/screens/components/drawer_list_tile.dart';
 
 import '../../router/routes-name.dart';
+import '../../widgets/dialog-add-new-customer.dart';
 
 class DrawerMenu extends StatelessWidget {
-  const DrawerMenu({Key? key}) : super(key: key);
+  DrawerMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    int index = context.watch<Controller>().getIndexContentPage;
+
     return Drawer(
       child: ListView(
         children: [
@@ -17,18 +24,46 @@ class DrawerMenu extends StatelessWidget {
             child: Image.asset("assets/images/logowithtext.png"),
           ),
           DrawerListTile(
-              title: 'Dash Board',
-              svgSrc: 'assets/icons/Dashboard.svg',
-              tap: () {}),
-          DrawerListTile(
-              title: 'Blog Post',
+              title: Text(
+                'Project',
+                style: TextStyle(color:index == 0 ? Colors.blue : grey,),
+              ),
               svgSrc: 'assets/icons/BlogPost.svg',
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                size: 12,
+              ),
+              tap: () {
+                context.read<Controller>().setIndexContentPage(0);
+
+              }),
+          DrawerListTile(
+            title: Text(
+              'Customer',
+              style: TextStyle(color:index == 1 ? Colors.blue : grey,),
+            ),
+            svgSrc: 'assets/icons/Dashboard.svg',
+            trailing: null,
+            tap: () {
+              context.read<Controller>().setIndexContentPage(1);
+
+            },
+          ),
+          DrawerListTile(
+              title: Text(
+                'Message',
+                style: TextStyle(color:  grey,),
+              ),
+              svgSrc: 'assets/icons/Message.svg',
+              trailing: null,
               tap: () {}),
           DrawerListTile(
-              title: 'Message', svgSrc: 'assets/icons/Message.svg', tap: () {}),
-          DrawerListTile(
-              title: 'Statistics',
+              title: Text(
+                'Statistics',
+                style: TextStyle(color: grey),
+              ),
               svgSrc: 'assets/icons/Statistics.svg',
+              trailing: null,
               tap: () {}),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: appPadding * 2),
@@ -37,17 +72,24 @@ class DrawerMenu extends StatelessWidget {
               thickness: 0.2,
             ),
           ),
-
           DrawerListTile(
-              title: 'Settings',
+              title: Text(
+                'Seetings',
+                style: TextStyle(color: grey),
+              ),
               svgSrc: 'assets/icons/Setting.svg',
+              trailing: null,
               tap: () {}),
           DrawerListTile(
-              title: 'Logout',
+              title: Text(
+                'Logout',
+                style: TextStyle(color: grey),
+              ),
               svgSrc: 'assets/icons/Logout.svg',
+              trailing: null,
               tap: () {
-
-                Navigator.of(context).pushNamed(RoutesName.HOME_URL,
+                Navigator.of(context).pushNamed(
+                  RoutesName.HOME_URL,
                 );
               }),
         ],

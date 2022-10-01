@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_admin_dashboard/controllers/auth-provider.dart';
 import 'package:responsive_admin_dashboard/controllers/controller.dart';
+import 'package:responsive_admin_dashboard/controllers/customer-provider.dart';
 import 'package:responsive_admin_dashboard/router/route-generator.dart';
 import 'package:responsive_admin_dashboard/router/routes-name.dart';
 import 'package:responsive_admin_dashboard/screens/dash_board_screen.dart';
@@ -35,6 +36,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => Controller()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => CustomerProvider()),
 
       ],
       child: const MyApp(),
